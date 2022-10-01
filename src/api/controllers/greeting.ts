@@ -1,0 +1,12 @@
+import { Request, Response } from "express";
+import { writeJsonResponse } from "@mareblog/utils/express";
+
+export function hello(req: Request, res: Response): void {
+    const name = req.query.name || 'stranger';
+    writeJsonResponse(res, 200, { message: `Hello, ${name}!` })
+}
+
+export function goodbye(req: Request, res: Response): void {
+    const { userId } = res.locals.auth
+    writeJsonResponse(res, 200, { message: `Goodbye, ${userId}` })
+}
