@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.auth = void 0;
-const user_1 = __importDefault(require("@mareblog/api/services/user"));
-const express_1 = require("@mareblog/utils/express");
+const user_1 = __importDefault(require("../services/user"));
+const express_1 = require("../../utils/express");
 function auth(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         const token = req.headers.authorization;

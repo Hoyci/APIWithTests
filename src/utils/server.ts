@@ -6,9 +6,9 @@ import morganBody from "morgan-body";
 import * as OpenApiValidator from "express-openapi-validator";
 import { connector, summarise } from "swagger-routes-express";
 import YAML from 'yamljs';
-import * as api from '@mareblog/api/controllers'
+import * as api from '../api/controllers';
 import { expressDevLogger } from "./express_dev_logger";
-import config from "@mareblog/config"
+import config from "../../config/index";
 
 
 export async function createServer(): Promise<Express> {
@@ -18,7 +18,8 @@ export async function createServer(): Promise<Express> {
     console.log('Summary API', apiSummary);
 
     const server = express();
-    server.use(bodyParser.json());
+    server.use(bodyParser.json()); // this can be changed for express.json()
+    console.log(config)
     if (config.morganLogger){
         server.use(morgan(':method :url :status :response-time ms - :res[content-length]'));
     }

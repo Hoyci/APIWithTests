@@ -1,4 +1,4 @@
-import { createServer } from "@mareblog/utils/server";
+import { createServer } from "./utils/server";
 
 createServer()
     .then(server => {

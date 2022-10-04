@@ -43,9 +43,9 @@ const morgan_body_1 = __importDefault(require("morgan-body"));
 const OpenApiValidator = __importStar(require("express-openapi-validator"));
 const swagger_routes_express_1 = require("swagger-routes-express");
 const yamljs_1 = __importDefault(require("yamljs"));
-const api = __importStar(require("@mareblog/api/controllers"));
+const api = __importStar(require("../api/controllers"));
 const express_dev_logger_1 = require("./express_dev_logger");
-const config_1 = __importDefault(require("@mareblog/config"));
+const index_1 = __importDefault(require("../../config/index"));
 function createServer() {
     return __awaiter(this, void 0, void 0, function* () {
         const yamlSpecFile = './config/openapi.yml';
@@ -53,14 +53,15 @@ function createServer() {
         const apiSummary = (0, swagger_routes_express_1.summarise)(apiDefinition);
         console.log('Summary API', apiSummary);
         const server = (0, express_1.default)();
-        server.use(body_parser_1.default.json());
-        if (config_1.default.morganLogger) {
+        server.use(body_parser_1.default.json()); // this can be changed for express.json()
+        console.log(index_1.default);
+        if (index_1.default.morganLogger) {
             server.use((0, morgan_1.default)(':method :url :status :response-time ms - :res[content-length]'));
         }
-        if (config_1.default.morganBodyLogger) {
+        if (index_1.default.morganBodyLogger) {
             (0, morgan_body_1.default)(server);
         }
-        if (config_1.default.exmplDevLogger) {
+        if (index_1.default.exmplDevLogger) {
             server.use(express_dev_logger_1.expressDevLogger);
         }
         const validatorOptions = {

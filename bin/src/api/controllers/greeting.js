@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.goodbye = exports.hello = void 0;
-const express_1 = require("@mareblog/utils/express");
+const express_1 = require("../../utils/express");
 function hello(req, res) {
     const name = req.query.name || 'stranger';
     (0, express_1.writeJsonResponse)(res, 200, { message: `Hello, ${name}!` });
