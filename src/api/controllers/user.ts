@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
-import UserService from "@mareblog/api/services/user";
-import { writeJsonResponse } from "@mareblog/utils/express";
+import UserService from "../services/user";
+import { writeJsonResponse } from "../../utils/express";
 
 export async function auth(req: Request, res: Response, next: NextFunction): Promise<void> {
     const token = req.headers.authorization!
@@ -16,6 +16,6 @@ export async function auth(req: Request, res: Response, next: NextFunction): Pro
             writeJsonResponse(res, 401, authResponse)
         }
     } catch (err){
-        writeJsonResponse(res, 500, { error: { type: 'internal_server_error', message: 'Internal server error' }})
+        writeJsonResponse(res, 500, { error: { type: 'internal_server_error', message: 'Internal Server Error' }})
     }
 }

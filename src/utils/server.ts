@@ -1,4 +1,3 @@
-import bodyParser from "body-parser";
 import express from "express";
 import { Express, Request, Response, NextFunction } from "express-serve-static-core";
 import morgan from "morgan";
@@ -6,27 +5,30 @@ import morganBody from "morgan-body";
 import * as OpenApiValidator from "express-openapi-validator";
 import { connector, summarise } from "swagger-routes-express";
 import YAML from 'yamljs';
-import * as api from '@mareblog/api/controllers'
+import * as api from '../api/controllers';
 import { expressDevLogger } from "./express_dev_logger";
-import config from "@mareblog/config"
+import config from "../../config/index";
+import logger from '../utils/logger';
 
 
 export async function createServer(): Promise<Express> {
     const yamlSpecFile = './config/openapi.yml';
     const apiDefinition = YAML.load(yamlSpecFile);
     const apiSummary = summarise(apiDefinition);
-    console.log('Summary API', apiSummary);
+    logger.info(apiSummary);
 
     const server = express();
-    server.use(bodyParser.json());
+    server.use(express.json());
+    
+     /* istanbul ignore next */
     if (config.morganLogger){
         server.use(morgan(':method :url :status :response-time ms - :res[content-length]'));
     }
-
+     /* istanbul ignore next */
     if (config.morganBodyLogger) {
         morganBody(server);
     }
-
+     /* istanbul ignore next */
     if (config.exmplDevLogger) {
         server.use(expressDevLogger);
     }
@@ -51,7 +53,7 @@ export async function createServer(): Promise<Express> {
     const connect = connector(api, apiDefinition, {
         onCreateRoute: (method: string, descriptor: any[]) => {
             descriptor.shift()
-            console.log(`${method}: ${descriptor.map((d: any) => d.name).join(', ')}`);
+            logger.verbose(`${method}: ${descriptor.map((d: any) => d.name).join(', ')}`);
         },
         security: {
             bearerAuth: api.auth
