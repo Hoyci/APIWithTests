@@ -46,7 +46,10 @@ const yamljs_1 = __importDefault(require("yamljs"));
 const api = __importStar(require("../api/controllers"));
 const express_dev_logger_1 = require("./express_dev_logger");
 const index_1 = __importDefault(require("../../config/index"));
+<<<<<<< HEAD:bin/src/utils/server.js
 const logger_1 = __importDefault(require("../utils/logger"));
+=======
+>>>>>>> 40c5cc83e4072451c7da3fe5ed9d38fb6736b02f:bin/utils/server.js
 function createServer() {
     return __awaiter(this, void 0, void 0, function* () {
         const yamlSpecFile = './config/openapi.yml';
@@ -55,7 +58,11 @@ function createServer() {
         logger_1.default.info('Summary API', apiSummary);
         const server = (0, express_1.default)();
         server.use(body_parser_1.default.json()); // this can be changed for express.json()
+<<<<<<< HEAD:bin/src/utils/server.js
         logger_1.default.info(index_1.default);
+=======
+        console.log(index_1.default);
+>>>>>>> 40c5cc83e4072451c7da3fe5ed9d38fb6736b02f:bin/utils/server.js
         if (index_1.default.morganLogger) {
             server.use((0, morgan_1.default)(':method :url :status :response-time ms - :res[content-length]'));
         }

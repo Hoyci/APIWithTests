@@ -8,8 +8,12 @@
   "scripts": {
     "build": "tsc",
     "start": "ENV_FILE=./config/.env.prod node -r tsconfig-paths/register ./bin/src/app.js",
+<<<<<<< HEAD
     "dev": "ENV_FILE=./config/.env.dev nodemon -r tsconfig-paths/register ./src/app.ts",
     "test:unit": "ENV_FILE=./config/.env.test jest"
+=======
+    "dev": "ENV_FILE=./config/.env.dev nodemon -r tsconfig-paths/register ./src/app.ts"
+>>>>>>> 40c5cc83e4072451c7da3fe5ed9d38fb6736b02f
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",

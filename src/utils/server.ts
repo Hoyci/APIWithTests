@@ -8,7 +8,10 @@ import YAML from 'yamljs';
 import * as api from '../api/controllers';
 import { expressDevLogger } from "./express_dev_logger";
 import config from "../../config/index";
+<<<<<<< HEAD
 import logger from '../utils/logger';
+=======
+>>>>>>> 40c5cc83e4072451c7da3fe5ed9d38fb6736b02f
 
 
 export async function createServer(): Promise<Express> {
@@ -18,9 +21,14 @@ export async function createServer(): Promise<Express> {
     logger.info(apiSummary);
 
     const server = express();
+<<<<<<< HEAD
     server.use(express.json());
     
      /* istanbul ignore next */
+=======
+    server.use(bodyParser.json()); // this can be changed for express.json()
+    console.log(config)
+>>>>>>> 40c5cc83e4072451c7da3fe5ed9d38fb6736b02f
     if (config.morganLogger){
         server.use(morgan(':method :url :status :response-time ms - :res[content-length]'));
     }

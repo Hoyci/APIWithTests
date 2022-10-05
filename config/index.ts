@@ -3,6 +3,7 @@ import dotenvParseVariables from "dotenv-parse-variables";
 
 type LogLevel = 'silent' | 'error' | 'warn' | 'info' | 'http' | 'verbose' | 'debug' | 'silly'
 
+<<<<<<< HEAD
 interface Config {
     mongo: {
         url: string,
@@ -17,6 +18,8 @@ interface Config {
 }
 
 
+=======
+>>>>>>> 40c5cc83e4072451c7da3fe5ed9d38fb6736b02f
 const env = dotenvExtended.load({
     path: process.env.ENV_FILE,
     defaults: './config/.env.defaults',
@@ -29,6 +32,15 @@ const env = dotenvExtended.load({
 
 const parsedEnv = dotenvParseVariables(env)
 
+<<<<<<< HEAD
+=======
+interface Config {
+    morganLogger: boolean;
+    morganBodyLogger: boolean;
+    exmplDevLogger: boolean;
+    loggerLevel: LogLevel
+}
+>>>>>>> 40c5cc83e4072451c7da3fe5ed9d38fb6736b02f
 
 const config: Config = {
     mongo: {
