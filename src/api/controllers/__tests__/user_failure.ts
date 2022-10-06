@@ -3,6 +3,7 @@ import { Express } from 'express-serve-static-core';
 
 import UserService from '../../services/user';
 import { createServer } from '../../../utils/server';
+import { faker } from '@faker-js/faker';
 
 jest.mock('../../services/user');
 
@@ -24,6 +25,30 @@ describe('auth failure', () => {
                     type: 'internal_server_error',
                     message: 'Internal Server Error'
                 }})
+                done()
+            })
+    })
+})
+
+describe('createUser failure', () => {
+    it('should return 500 "valid response if auth rejects with an error', done => {
+        (UserService.createUser as jest.Mock).mockResolvedValue({ error: { type: 'unknown'}})
+        request(server)
+            .post('/api/v1/user')
+            .send({
+                email: faker.internet.email(),
+                password: faker.internet.password(),
+                name: faker.name.firstName()
+            })
+            .expect(500)
+            .end((err, res) => {
+                if (err) return done(err)
+                expect(res.body).toMatchObject({
+                    error: {
+                        type: 'internal_server_error',
+                        message: 'Internal Server Error'
+                    }
+                })
                 done()
             })
     })
