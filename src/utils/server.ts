@@ -5,14 +5,11 @@ import morganBody from "morgan-body";
 import * as OpenApiValidator from "express-openapi-validator";
 import { connector, summarise } from "swagger-routes-express";
 import YAML from 'yamljs';
+
 import * as api from '../api/controllers';
 import { expressDevLogger } from "./express_dev_logger";
 import config from "../../config/index";
-<<<<<<< HEAD
-import logger from '../utils/logger';
-=======
->>>>>>> 40c5cc83e4072451c7da3fe5ed9d38fb6736b02f
-
+import logger from "./logger";
 
 export async function createServer(): Promise<Express> {
     const yamlSpecFile = './config/openapi.yml';
@@ -21,18 +18,12 @@ export async function createServer(): Promise<Express> {
     logger.info(apiSummary);
 
     const server = express();
-<<<<<<< HEAD
     server.use(express.json());
-    
-     /* istanbul ignore next */
-=======
-    server.use(bodyParser.json()); // this can be changed for express.json()
-    console.log(config)
->>>>>>> 40c5cc83e4072451c7da3fe5ed9d38fb6736b02f
+    /* istanbul ignore next */
     if (config.morganLogger){
         server.use(morgan(':method :url :status :response-time ms - :res[content-length]'));
     }
-     /* istanbul ignore next */
+    /* istanbul ignore next */
     if (config.morganBodyLogger) {
         morganBody(server);
     }
@@ -47,7 +38,7 @@ export async function createServer(): Promise<Express> {
         validateResponses: true
     };
 
-    server.use(OpenApiValidator.middleware(validatorOptions));
+    server.use(OpenApiValidator.middleware(validatorOptions))
     server.use((err: any, req: Request, res: Response, next: NextFunction) => {
         res.status(err.status).json({
             error: {
